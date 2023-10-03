@@ -36,7 +36,7 @@ This is the starting basis to make a virtual office for employers and coworkers 
         You can ignore the warnings. If it builds successfully, you should see *"The build folder is ready to be deployed"* towards the end
 
 10. Start your frontend server
-    `serve -s build`
+    `serve -s build` or `npx serve -s build`
 
 11. Open a browser window and go to http://localhost:3000/
 
