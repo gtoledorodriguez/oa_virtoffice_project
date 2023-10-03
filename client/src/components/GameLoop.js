@@ -30,7 +30,7 @@ const GameLoop = ({children, allCharactersData}) => {
             // console.log(MOVE_DIRECTIONS[key]);
             // console.log(MOVE_DIRECTIONS[key][0]);
 
-            console.log(currentPosition);
+            console.log("Start: ", currentPosition);
 
             var xPos = currentPosition.x+MOVE_DIRECTIONS[key][0];
             var yPos = currentPosition.y+MOVE_DIRECTIONS[key][1];
@@ -39,9 +39,12 @@ const GameLoop = ({children, allCharactersData}) => {
             console.log(yPos);
 
             currentPosition = {x: xPos, y: yPos};
-            
 
-            console.log(mycharacterData.position);
+            console.log("End: ", currentPosition)
+
+            //mycharacterData.position.useState(currentPosition);
+
+            //console.log(mycharacterData.position);
             
             //mycharacterData.position = currentPosition;
             
