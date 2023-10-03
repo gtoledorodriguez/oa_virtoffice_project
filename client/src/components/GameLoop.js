@@ -42,7 +42,7 @@ const GameLoop = ({children, allCharactersData}) => {
 
             console.log("End: ", currentPosition)
 
-            // mycharacterData.position = {x: xPos, y: yPos};
+            mycharacterData.position = {x: xPos, y: yPos};
 
             //mycharacterData.position.useState();
 
