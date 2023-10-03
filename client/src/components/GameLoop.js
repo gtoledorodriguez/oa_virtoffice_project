@@ -25,6 +25,26 @@ const GameLoop = ({children, allCharactersData}) => {
         if (MOVE_DIRECTIONS[key]) {
             // ***********************************************
             // TODO: Add your move logic here
+            
+            // console.log(key);
+            // console.log(MOVE_DIRECTIONS[key]);
+            // console.log(MOVE_DIRECTIONS[key][0]);
+
+            console.log(currentPosition);
+
+            var xPos = currentPosition.x+MOVE_DIRECTIONS[key][0];
+            var yPos = currentPosition.y+MOVE_DIRECTIONS[key][1];
+
+            console.log(xPos);
+            console.log(yPos);
+
+            currentPosition = {x: xPos, y: yPos};
+            
+
+            console.log(mycharacterData.position);
+            
+            //mycharacterData.position = currentPosition;
+            
         }
     }, [mycharacterData]);
 
