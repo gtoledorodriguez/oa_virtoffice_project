@@ -47,7 +47,7 @@ function MyCharacter({ myCharactersData, loadCharacter, updateAllCharactersData,
 }
 
 const mapStateToProps = (state) => {
-    console.log("mapStateToProps: state.allCharacters.users: ", state.allCharacters.users);
+    // console.log("mapStateToProps: state.allCharacters.users: ", state.allCharacters.users);
     return {myCharactersData: state.allCharacters.users[MY_CHARACTER_INIT_CONFIG.id]};
 };
 
