@@ -17,7 +17,7 @@ const GameLoop = ({children, allCharactersData}) => {
 
     // keeps the reference to the main rendering loop
     const loopRef = useRef();
-    let mycharacterData = allCharactersData[MY_CHARACTER_INIT_CONFIG.id];
+    const mycharacterData = allCharactersData[MY_CHARACTER_INIT_CONFIG.id];
 
     const moveMyCharacter = useCallback((e) => {
         var currentPosition = mycharacterData.position;
