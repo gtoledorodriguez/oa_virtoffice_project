@@ -6,7 +6,9 @@ import {MOVE_DIRECTIONS, MAP_DIMENSIONS, TILE_SIZE} from './mapConstants';
 import { MY_CHARACTER_INIT_CONFIG } from './characterConstants';
 import {checkMapCollision} from './utils';
 
-const GameLoop = ({children, allCharactersData}) => {
+import {update as updateAllCharactersData} from './slices/allCharactersSlice'
+
+const GameLoop = ({children, allCharactersData, updateAllCharactersData}) => {
     const canvasRef = useRef(null);
     const [context, setContext] = useState(null);
     useEffect(() => {
@@ -35,20 +37,25 @@ const GameLoop = ({children, allCharactersData}) => {
             var xPos = currentPosition.x+MOVE_DIRECTIONS[key][0];
             var yPos = currentPosition.y+MOVE_DIRECTIONS[key][1];
 
-            console.log(xPos);
-            console.log(yPos);
+            // console.log(xPos);
+            // console.log(yPos);
 
-            currentPosition = {x: xPos, y: yPos};
+            // currentPosition = {x: xPos, y: yPos};
 
-            console.log("End: ", currentPosition)
+            // console.log("End: ", currentPosition);
 
-            mycharacterData.position = {x: xPos, y: yPos};
+            // mycharacterData.position = {x: xPos, y: yPos};
 
-            //mycharacterData.position.useState();
+            const newUsersList = {...allCharactersData};
+            newUsersList[MY_CHARACTER_INIT_CONFIG.id] = {
+                ...mycharacterData, 
+                position: {
+                    x: xPos,
+                    y: yPos
+                }
+            };
+            updateAllCharactersData(newUsersList);
 
-            //console.log(mycharacterData.position);
-            
-            //mycharacterData.position = currentPosition;
             
         }
     }, [mycharacterData]);
@@ -91,4 +98,4 @@ const mapStateToProps = (state) => {
     return {allCharactersData: state.allCharacters.users};
 };
 
-export default connect(mapStateToProps, {})(GameLoop);
+export default connect(mapStateToProps, {updateAllCharactersData})(GameLoop);
