@@ -16,15 +16,14 @@ import { getDatabase } from "firebase/database";
 //   measurementId: "G-JDJCEPS4YH"
 // };
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_apiKey,
-    authDomain: process.env.REACT_APP_authDomain,
-    projectId: process.env.REACT_APP_projectId,
-    storageBucket: process.env.REACT_APP_storageBucket,
-    messagingSenderId: process.env.REACT_APP_messagingSenderId,
-    appId: process.env.REACT_APP_appId,
-    measurementId: process.env.REACT_APP_measurementId,
-    databaseURL: "https://oa-virtoffice-project-default-rtdb.firebaseio.com/",
-  };
+  apiKey: "AIzaSyBMbEqT9cbcO4WzSJTYDUPcB3CiXN6HmpA",
+  authDomain: "oa-virtoffice-project-a622a.firebaseapp.com",
+  projectId: "oa-virtoffice-project-a622a",
+  storageBucket: "oa-virtoffice-project-a622a.appspot.com",
+  messagingSenderId: "620756780765",
+  appId: "1:620756780765:web:7fb469f1db545b35f27d34",
+  measurementId: "G-SRRXZ4C9NH"
+};
 
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
