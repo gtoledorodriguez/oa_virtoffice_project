@@ -37,25 +37,19 @@ const GameLoop = ({children, allCharactersData, updateAllCharactersData}) => {
             var xPos = currentPosition.x+MOVE_DIRECTIONS[key][0];
             var yPos = currentPosition.y+MOVE_DIRECTIONS[key][1];
 
-            // console.log(xPos);
-            // console.log(yPos);
+            if(!checkMapCollision(xPos,yPos)){
 
-            // currentPosition = {x: xPos, y: yPos};
-
-            // console.log("End: ", currentPosition);
-
-            // mycharacterData.position = {x: xPos, y: yPos};
-
-            const newUsersList = {...allCharactersData};
-            newUsersList[MY_CHARACTER_INIT_CONFIG.id] = {
-                ...mycharacterData, 
-                position: {
-                    x: xPos,
-                    y: yPos
-                }
-            };
-            updateAllCharactersData(newUsersList);
-
+                const newUsersList = {...allCharactersData};
+                newUsersList[MY_CHARACTER_INIT_CONFIG.id] = {
+                    ...mycharacterData, 
+                    position: {
+                        x: xPos,
+                        y: yPos
+                    }
+                };
+                updateAllCharactersData(newUsersList);
+        
+            }
             
         }
     }, [mycharacterData]);
