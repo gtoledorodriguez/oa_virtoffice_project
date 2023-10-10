@@ -7,6 +7,7 @@ import { MY_CHARACTER_INIT_CONFIG } from './characterConstants';
 import {checkMapCollision} from './utils';
 
 import {update as updateAllCharactersData} from './slices/allCharactersSlice'
+import { firebaseDatabase } from '../firebase/firebase';
 
 const GameLoop = ({children, allCharactersData, updateAllCharactersData}) => {
     const canvasRef = useRef(null);
@@ -27,10 +28,6 @@ const GameLoop = ({children, allCharactersData, updateAllCharactersData}) => {
         if (MOVE_DIRECTIONS[key]) {
             // ***********************************************
             // TODO: Add your move logic here
-            
-            // console.log(key);
-            // console.log(MOVE_DIRECTIONS[key]);
-            // console.log(MOVE_DIRECTIONS[key][0]);
 
             console.log("Start: ", currentPosition);
 
@@ -38,6 +35,11 @@ const GameLoop = ({children, allCharactersData, updateAllCharactersData}) => {
             var yPos = currentPosition.y+MOVE_DIRECTIONS[key][1];
 
             if(!checkMapCollision(xPos,yPos)){
+
+                const newPos = {
+                    x: xPos,
+                    y: yPos
+                };
 
                 const newUsersList = {...allCharactersData};
                 newUsersList[MY_CHARACTER_INIT_CONFIG.id] = {
@@ -48,6 +50,9 @@ const GameLoop = ({children, allCharactersData, updateAllCharactersData}) => {
                     }
                 };
                 updateAllCharactersData(newUsersList);
+
+                // const posRef = ref(firebaseDatabase, 'users/'+ MY_CHARACTER_INIT_CONFIG.id + '/position');
+                // set(posRef, newPos)
         
             }
             
