@@ -31,25 +31,29 @@ const GameLoop = ({children, allCharactersData, updateAllCharactersData}) => {
 
             console.log("Start: ", currentPosition);
 
-            var xPos = currentPosition.x+MOVE_DIRECTIONS[key][0];
-            var yPos = currentPosition.y+MOVE_DIRECTIONS[key][1];
+            const [x, y] = MOVE_DIRECTIONS[key];
+            var xPos = currentPosition.x + x;
+            var yPos = currentPosition.y + y;
 
-            if(!checkMapCollision(xPos,yPos)){
+            if(!checkMapCollision(xPos,yPos)){ 
 
                 const newPos = {
                     x: xPos,
                     y: yPos
                 };
 
-                const newUsersList = {...allCharactersData};
-                newUsersList[MY_CHARACTER_INIT_CONFIG.id] = {
+                const updateMyCharacterData = {
                     ...mycharacterData, 
-                    position: {
-                        x: xPos,
-                        y: yPos
-                    }
+                    position: newPos
                 };
-                updateAllCharactersData(newUsersList);
+
+                const updatedUsersList = {
+                    ...allCharactersData
+                };
+
+                updatedUsersList[MY_CHARACTER_INIT_CONFIG.id] = updateMyCharacterData;
+                
+                updateAllCharactersData(updatedUsersList);
 
                 // const posRef = ref(firebaseDatabase, 'users/'+ MY_CHARACTER_INIT_CONFIG.id + '/position');
                 // set(posRef, newPos)
