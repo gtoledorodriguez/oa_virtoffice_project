@@ -8,6 +8,7 @@ import {checkMapCollision} from './utils';
 
 import {update as updateAllCharactersData} from './slices/allCharactersSlice'
 import { firebaseDatabase } from '../firebase/firebase';
+import { ref, set } from "firebase/database";
 
 const GameLoop = ({children, allCharactersData, updateAllCharactersData}) => {
     const canvasRef = useRef(null);
@@ -36,27 +37,24 @@ const GameLoop = ({children, allCharactersData, updateAllCharactersData}) => {
             var yPos = currentPosition.y + y;
 
             if(!checkMapCollision(xPos,yPos)){ 
-
                 const newPos = {
                     x: xPos,
                     y: yPos
                 };
+                // From app to redux:
+                //
+                // const updateMyCharacterData = {
+                //     ...mycharacterData, 
+                //     position: newPos
+                // };
+                // const updatedUsersList = {
+                //     ...allCharactersData
+                // };
+                // updatedUsersList[MY_CHARACTER_INIT_CONFIG.id] = updateMyCharacterData;
+                // updateAllCharactersData(updatedUsersList);
 
-                const updateMyCharacterData = {
-                    ...mycharacterData, 
-                    position: newPos
-                };
-
-                const updatedUsersList = {
-                    ...allCharactersData
-                };
-
-                updatedUsersList[MY_CHARACTER_INIT_CONFIG.id] = updateMyCharacterData;
-                
-                updateAllCharactersData(updatedUsersList);
-
-                // const posRef = ref(firebaseDatabase, 'users/'+ MY_CHARACTER_INIT_CONFIG.id + '/position');
-                // set(posRef, newPos)
+                const posRef = ref(firebaseDatabase, 'users/'+ MY_CHARACTER_INIT_CONFIG.id + '/position');
+                set(posRef, newPos);
         
             }
             
