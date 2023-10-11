@@ -54,6 +54,21 @@ const GameLoop = ({children, allCharactersData, updateAllCharactersData}) => {
                 // updateAllCharactersData(updatedUsersList);
 
                 const posRef = ref(firebaseDatabase, 'users/'+ MY_CHARACTER_INIT_CONFIG.id + '/position');
+
+                onValue(posRef, (snapshot) => {
+                    // const data = snapshot.val();
+                    const updateMyCharacterData = {
+                    ...mycharacterData, 
+                    position: snapshot.val()
+                };
+                const updatedUsersList = {
+                    ...allCharactersData
+                };
+                updatedUsersList[MY_CHARACTER_INIT_CONFIG.id] = updateMyCharacterData;
+                updateAllCharactersData(updatedUsersList);
+                  });
+
+                
                 set(posRef, newPos);
         
             }
