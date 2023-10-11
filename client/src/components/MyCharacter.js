@@ -26,7 +26,18 @@ function MyCharacter({ myCharactersData, loadCharacter, updateAllCharactersData,
         // users[myId] = myInitData;
         // updateAllCharactersData(users);
 
-        set(ref(firebaseDatabase, 'users/' + myId), myInitData);
+        const userRef = ref(firebaseDatabase, 'users/' + myId)
+        set(userRef, myInitData);
+
+        //attempting to fix GameLoop.js line 27, mycharacterData.position not readable
+        onValue(userRef, (snapshot) => {
+            const data = snapshot.val();
+
+            console.log("MyCharacter: ", data)
+            const users = {};
+            users[myId] = data;
+            updateAllCharactersData(users);
+          });
 
     }, [webrtcSocket]);
 
