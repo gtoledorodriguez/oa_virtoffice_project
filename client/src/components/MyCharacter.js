@@ -9,7 +9,7 @@ import { MY_CHARACTER_INIT_CONFIG } from './characterConstants';
 import {update as updateAllCharactersData} from './slices/allCharactersSlice'
 
 import { firebaseDatabase } from '../firebase/firebase';
-import { ref, set } from "firebase/database";
+import { ref, set, onValue } from "firebase/database";
 
 
 function MyCharacter({ myCharactersData, loadCharacter, updateAllCharactersData, webrtcSocket }) {
