@@ -1,15 +1,13 @@
 import React, {useEffect, useContext} from 'react';
 import {connect} from 'react-redux';
-
 import CanvasConext from './CanvasContext';
 import {CHARACTER_IMAGE_SIZE, CHARACTER_CLASSES_MAP} from './characterConstants';
 import {TILE_SIZE} from './mapConstants';
 import {loadCharacter} from './slices/statusSlice';
 import { MY_CHARACTER_INIT_CONFIG } from './characterConstants';
-import {update as updateAllCharactersData} from './slices/allCharactersSlice'
-
+import {update as updateAllCharactersData} from './slices/allCharactersSlice';
 import { firebaseDatabase } from '../firebase/firebase';
-import { ref, set, onValue } from "firebase/database";
+import { ref, set, onValue, remove } from "firebase/database";
 
 
 function MyCharacter({ myCharactersData, loadCharacter, updateAllCharactersData, webrtcSocket }) {
@@ -19,22 +17,17 @@ function MyCharacter({ myCharactersData, loadCharacter, updateAllCharactersData,
             ...MY_CHARACTER_INIT_CONFIG,
             socketId: webrtcSocket.id,
         };
-
-        const myId = MY_CHARACTER_INIT_CONFIG.id;
-
-        const userRef = ref(firebaseDatabase, 'users/' + myId)
-        set(userRef, myInitData);
-
-        //attempting to fix GameLoop.js line 27, mycharacterData.position not readable
-        onValue(userRef, (snapshot) => {
-            const data = snapshot.val();
-
-            console.log("MyCharacter: ", data)
-            const users = {};
-            users[myId] = data;
-            updateAllCharactersData(users);
-          });
-
+        set(ref(firebaseDatabase, 'users/' + MY_CHARACTER_INIT_CONFIG.id), myInitData);
+        return () => {
+            var myCharacterRef = ref(firebaseDatabase, 'users/' + MY_CHARACTER_INIT_CONFIG.id);
+            remove(myCharacterRef)
+                .then(function(){
+                    console.log("MyCharacter remove succeeded.");
+                })
+                .catch(function(error){
+                    console.log("MyCharacter remove failed: " + error.message);
+                });
+        }
     }, [webrtcSocket]);
 
     useEffect(() => {
@@ -65,6 +58,6 @@ const mapStateToProps = (state) => {
     return {myCharactersData: state.allCharacters.users[MY_CHARACTER_INIT_CONFIG.id]};
 };
 
-const mapDispatch = {loadCharacter, updateAllCharactersData};
+const mapDispatch = {loadCharacter};
 
 export default connect(mapStateToProps, mapDispatch)(MyCharacter);
