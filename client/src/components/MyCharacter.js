@@ -22,10 +22,6 @@ function MyCharacter({ myCharactersData, loadCharacter, updateAllCharactersData,
 
         const myId = MY_CHARACTER_INIT_CONFIG.id;
 
-        // const users = {};
-        // users[myId] = myInitData;
-        // updateAllCharactersData(users);
-
         const userRef = ref(firebaseDatabase, 'users/' + myId)
         set(userRef, myInitData);
 
