@@ -9,6 +9,7 @@ import { checkMapCollision } from './utils';
 import { update as updateAllCharactersData } from './slices/allCharactersSlice'
 import { firebaseDatabase } from '../firebase/firebase';
 import { ref, set, onValue } from "firebase/database";
+import FirebaseListener from './FirebaseListener';
 
 const GameLoop = ({ children, allCharactersData, updateAllCharactersData }) => {
     const canvasRef = useRef(null);
@@ -108,6 +109,7 @@ const GameLoop = ({ children, allCharactersData, updateAllCharactersData }) => {
                 height={TILE_SIZE * MAP_DIMENSIONS.ROWS}
                 class="main-canvas"
             />
+            <FirebaseListener/>
             {children}
         </CanvasContext.Provider>
     );
