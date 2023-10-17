@@ -42,17 +42,6 @@ const GameLoop = ({ children, allCharactersData, updateAllCharactersData }) => {
                     x: xPos,
                     y: yPos
                 };
-                // From app to redux:
-                //
-                // const updateMyCharacterData = {
-                //     ...mycharacterData, 
-                //     position: newPos
-                // };
-                // const updatedUsersList = {
-                //     ...allCharactersData
-                // };
-                // updatedUsersList[MY_CHARACTER_INIT_CONFIG.id] = updateMyCharacterData;
-                // updateAllCharactersData(updatedUsersList);
 
                 const posRef = ref(firebaseDatabase, 'users/' + MY_CHARACTER_INIT_CONFIG.id + '/position');
 
