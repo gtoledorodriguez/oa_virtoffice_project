@@ -6,6 +6,7 @@ import Map from './Map';
 import CanvasContext from './CanvasContext';
 import MyCharacter from './MyCharacter';
 import {MAP_DIMENSIONS, TILE_SIZE, MAP_TILE_IMAGES} from './mapConstants';
+import OtherCharacters from './OtherCharacters';
 
 const Office = ({mapImagesLoaded, gameStatus, webrtcSocket}) => {
     const width = MAP_DIMENSIONS.COLS * TILE_SIZE;
@@ -29,6 +30,7 @@ const Office = ({mapImagesLoaded, gameStatus, webrtcSocket}) => {
                 </>
             }
             {gameStatus.mapLoaded && <MyCharacter webrtcSocket={webrtcSocket}/>}
+            {gameStatus.mapLoaded && <OtherCharacters/>}
         </>
     );
 };
