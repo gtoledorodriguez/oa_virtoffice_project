@@ -12,6 +12,11 @@ function VideoCalls({ myCharacterData, otherCharactersData, webrtcSocket}) {
             setMyStream(stream);
         });
     }, []);
+
+    //Add Listener to listen for websocket
+    socket.on("sendOffer", () => { //callToUserSocketId, callFromUserSocket, offerSignal
+        console.log("Listened to sendOffer");
+      });
     
     const myUserId = myCharacterData?.id;
     const initiateCallToUSers = Object.keys(otherCharactersData)
