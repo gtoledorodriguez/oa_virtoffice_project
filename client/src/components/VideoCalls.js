@@ -45,3 +45,5 @@ const mapStateToProps = (state) => {
         return filteredObj;
     }, []);
 }
+
+export default connect(mapStateToProps, {}) (VideoCalls);
