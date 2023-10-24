@@ -35,3 +35,13 @@ function VideoCalls({ myCharacterData, otherCharactersData, webrtcSocket}) {
         </div>
     } </>;
 }
+
+const mapStateToProps = (state) => {
+    const myCharacterData = state.allCharacters.users[MY_CHARACTER_INIT_CONFIG.id];
+    const otherCharactersData = Object.keys(state.allCharacters.users)
+    .filter(id => id != MY_CHARACTER_INIT_CONFIG.id)
+    .reduce((filteredObj, key) => {
+        filteredObj[key] = otherCharactersData[key];
+        return filteredObj;
+    }, []);
+}
