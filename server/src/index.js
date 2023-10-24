@@ -18,6 +18,7 @@ io.on("connection", (socket) => {
     socket.emit("me", socket.id);
     socket.on("sendOffer", ({callToUserSocketId, callFromUserSocketId, offerSignal}) => {
         console.log("sending offer from ", callFromUserSocketId, ' to ', callToUserSocketId);
+        //Send offer to client, use emit
     });
 });
 server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

@@ -14,8 +14,8 @@ function VideoCalls({ myCharacterData, otherCharactersData, webrtcSocket}) {
     }, []);
 
     //Add Listener to listen for websocket
-    socket.on("sendOffer", () => { //callToUserSocketId, callFromUserSocket, offerSignal
-        console.log("Listened to sendOffer");
+    webrtcSocket.on("recieveOffer", () => { //callToUserSocketId, callFromUserSocket, offerSignal
+        console.log("Listened to recieveOffer");
       });
     
     const myUserId = myCharacterData?.id;
@@ -38,6 +38,8 @@ function VideoCalls({ myCharacterData, otherCharactersData, webrtcSocket}) {
                 webrtcSocket={webrtcSocket} />
             })}
         </div>
+
+        //Add MyVideo Here
     } </>;
 }
 
