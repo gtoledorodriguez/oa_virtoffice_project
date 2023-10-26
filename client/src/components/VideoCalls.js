@@ -14,9 +14,10 @@ function VideoCalls({ myCharacterData, otherCharactersData, webrtcSocket}) {
     }, []);
 
     //Add Listener to listen for websocket
-    webrtcSocket.on("recieveOffer", () => { //callToUserSocketId, callFromUserSocket, offerSignal
-        console.log("Listened to recieveOffer");
-      });
+    // webrtcSocket.on("recieveOffer", (callFromUserSocketId, callToUserSocketId, offerSignal) => { 
+    //     // console.log("Listened to recieveOffer");
+    //     console.log("recieved offer from ", callFromUserSocketId, ' to ', callToUserSocketId);
+    //   });
     
     const myUserId = myCharacterData?.id;
     const initiateCallToUSers = Object.keys(otherCharactersData)
@@ -24,7 +25,7 @@ function VideoCalls({ myCharacterData, otherCharactersData, webrtcSocket}) {
     .reduce((filteredObj, key) => {
         filteredObj[key] = otherCharactersData[key];
         return filteredObj;
-    }, []);
+    }, {});
 
     return <> {
         myCharacterData && <div className="videos">
@@ -39,7 +40,7 @@ function VideoCalls({ myCharacterData, otherCharactersData, webrtcSocket}) {
             })}
         </div>
 
-        //Add MyVideo Here
+        //Add MyVideo Here 
     } </>;
 }
 
@@ -48,9 +49,10 @@ const mapStateToProps = (state) => {
     const otherCharactersData = Object.keys(state.allCharacters.users)
     .filter(id => id != MY_CHARACTER_INIT_CONFIG.id)
     .reduce((filteredObj, key) => {
-        filteredObj[key] = otherCharactersData[key];
+        filteredObj[key] = state.allCharacters.users[key]; 
         return filteredObj;
-    }, []);
+    }, {});
+    return {myCharacterData: myCharacterData, otherCharactersData: otherCharactersData};
 }
 
 export default connect(mapStateToProps, {}) (VideoCalls);
