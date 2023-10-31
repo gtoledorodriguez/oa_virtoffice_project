@@ -10,8 +10,9 @@ function InitiatedVideoCall({mySocketId, myStream, othersSocketId, webrtcSocket}
             trickle: false,
             stream: myStream,
         });
-        peer.on('signal', signal =>{
-            webrtcSocket.emit('sendOffer', {callToUserSocketId: othersSocketId, callFromUserSocket: mySocketId, offerSignal: signal});
+        // console.log("InitiatedVideoCall: mySocketId = ", mySocketId);
+        peer.on('signal', signal => {
+            webrtcSocket.emit('sendOffer', {callToUserSocketId: othersSocketId, callFromUserSocketId: mySocketId, offerSignal: signal});
         });
         return peer;
     }, []);
