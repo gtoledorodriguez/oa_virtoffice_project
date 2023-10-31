@@ -39,6 +39,7 @@ function VideoCalls({ myCharacterData, otherCharactersData, webrtcSocket}) {
         myCharacterData && <div className="videos">
             <MyVideo myStream={myStream} />
             { Object.keys(initiateCallToUSers).map((othersUserId) => {
+                // console.log("My Character Data: ", myCharacterData);
                 return <InitiatedVideoCall
                 key={initiateCallToUSers[othersUserId].socketId}
                 mySocketId={myCharacterData.socketId}
