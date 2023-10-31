@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import InitiatedVideoCall from './InitiatedVideoCall';
-//import Recieved Video Calls
+import ReceivedVideoCall from "./ReceivedVideoCall";
 import MyVideo from './MyVideo';
 import { connect } from "react-redux";
 import { MY_CHARACTER_INIT_CONFIG } from "./characterConstants";
@@ -47,7 +47,7 @@ function VideoCalls({ myCharacterData, otherCharactersData, webrtcSocket}) {
                 othersSocketId={initiateCallToUSers[othersUserId].socketId}
                 webrtcSocket={webrtcSocket} />
             })}
-            {/* {
+            {
                 Object.keys(offersRecieved).map((othersSocketId) => {
                     const matchingUserIds = Object.keys(otherCharactersData)
                     .filter((othersUserId) => otherCharactersData[othersUserId].socketId === othersSocketId)
@@ -66,7 +66,7 @@ function VideoCalls({ myCharacterData, otherCharactersData, webrtcSocket}) {
                         webrtcSocket={webrtcSocket}
                         offerSignal={offersRecieved[othersSocketId]} />
                 })
-            } */}
+            }
         </div>
     } </>;
 }
