@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { MY_CHARACTER_INIT_CONFIG } from "./characterConstants";
 
 function OtherCharacters({ otherCharactersData }) {
-    console.log("OtherCharacters");
+    // console.log("OtherCharacters");
     return <>{
         Object.keys(otherCharactersData).map((id) => (
             // console.log("OtherCharacters: List", id, " position: ", otherCharactersData[id]['position']['x'], ", ", otherCharactersData[id]['position']['y']);
