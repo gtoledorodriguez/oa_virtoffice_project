@@ -11,12 +11,12 @@ import { ref, set, onValue, remove } from "firebase/database";
 
 
 function OtherCharacter({ name, x, y, characterClass }) {
-    console.log("HERE");
+    // console.log("HERE");
 
     const context = useContext(CanvasConext);
 
     useEffect(() => {
-        console.log("OtherCharacter: Entered");
+        // console.log("OtherCharacter: Entered");
         if (context == null) {
             return;
         }

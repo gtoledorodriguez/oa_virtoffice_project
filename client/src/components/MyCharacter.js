@@ -11,7 +11,7 @@ import { ref, set, onValue, remove } from "firebase/database";
 
 
 function MyCharacter({ myCharactersData, loadCharacter, updateAllCharactersData, webrtcSocket }) {
-    console.log("MY Character: ", MY_CHARACTER_INIT_CONFIG.id, " Position: ", MY_CHARACTER_INIT_CONFIG.position.x, ", ", MY_CHARACTER_INIT_CONFIG.position.y );
+    // console.log("MY Character: ", MY_CHARACTER_INIT_CONFIG.id, " Position: ", MY_CHARACTER_INIT_CONFIG.position.x, ", ", MY_CHARACTER_INIT_CONFIG.position.y );
     const context = useContext(CanvasConext);
     useEffect(() => {
         const myInitData = {

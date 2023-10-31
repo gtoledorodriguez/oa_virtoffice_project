@@ -9,7 +9,7 @@ const FirebaseListener = ({updateAllCharactersData}) => {
         const usersRef = ref(firebaseDatabase, 'users/');
         const unsubsribeUsersListener = onValue(usersRef, (snapshot) => {
             const data = snapshot.val();
-            console.log("FirebaseListener data: ", data);
+            // console.log("FirebaseListener data: ", data);
             updateAllCharactersData(data);
         });
         return unsubsribeUsersListener;

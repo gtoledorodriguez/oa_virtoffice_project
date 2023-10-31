@@ -7,7 +7,7 @@ const allCharactersSlice = createSlice({
     },
     reducers: {
         update(state, action) {
-            console.log("allCharactersSlice update updatedUserList: ", action.payload);
+            // console.log("allCharactersSlice update updatedUserList: ", action.payload);
             const updatedUserList = action.payload;       
             state.users = updatedUserList;
         },
