@@ -1,8 +1,9 @@
 import React, {useEffect, useRef, useState} from "react";
 import InitiatedVideoCall from './InitiatedVideoCall';
+//import Recieved Video Calls
+import MyVideo from './MyVideo';
 import { connect } from "react-redux";
 import { MY_CHARACTER_INIT_CONFIG } from "./characterConstants";
-import MyVideo from './MyVideo';
 
 function VideoCalls({ myCharacterData, otherCharactersData, webrtcSocket}) {
     const [myStream, setMyStream] = useState();
@@ -36,6 +37,7 @@ function VideoCalls({ myCharacterData, otherCharactersData, webrtcSocket}) {
 
     return <> {
         myCharacterData && <div className="videos">
+            <MyVideo myStream={myStream} />
             { Object.keys(initiateCallToUSers).map((othersUserId) => {
 
                 return <InitiatedVideoCall
@@ -46,8 +48,6 @@ function VideoCalls({ myCharacterData, otherCharactersData, webrtcSocket}) {
                 webrtcSocket={webrtcSocket} />
             })}
         </div>
-
-        //Add MyVideo Here 
     } </>;
 }
 
