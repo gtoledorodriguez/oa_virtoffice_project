@@ -39,7 +39,6 @@ function VideoCalls({ myCharacterData, otherCharactersData, webrtcSocket}) {
         myCharacterData && <div className="videos">
             <MyVideo myStream={myStream} />
             { Object.keys(initiateCallToUSers).map((othersUserId) => {
-
                 return <InitiatedVideoCall
                 key={initiateCallToUSers[othersUserId].socketId}
                 mySocketId={myCharacterData.socketId}
@@ -47,6 +46,26 @@ function VideoCalls({ myCharacterData, otherCharactersData, webrtcSocket}) {
                 othersSocketId={initiateCallToUSers[othersUserId].socketId}
                 webrtcSocket={webrtcSocket} />
             })}
+            {/* {
+                Object.keys(offersRecieved).map((othersSocketId) => {
+                    const matchingUserIds = Object.keys(otherCharactersData)
+                    .filter((othersUserId) => otherCharactersData[othersUserId].socketId === othersSocketId)
+
+                    console.assert(
+                        matchingUserIds.length === 1,
+                        "Unexpected list of matching user ids",
+                        matchingUserIds
+                    )
+
+                    return <ReceivedVideoCall 
+                        key={othersSocketId}
+                        mySocketId={myCharacterData.socketId}
+                        myStream={myStream}
+                        othersSocketId={othersSocketId}
+                        webrtcSocket={webrtcSocket}
+                        offerSignal={offersRecieved[othersSocketId]} />
+                })
+            } */}
         </div>
     } </>;
 }
