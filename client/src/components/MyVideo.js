@@ -1,7 +1,13 @@
-import React, {useEffect, useRef, useCallback, useState} from "react";
+import React, {useCallback} from "react";
 
-function MyVideo(){
-//Use video tag here
-};
+function MyVideo({myStream}){
+       const setVideoNode = useCallback(videoNode => {
+              videoNode && (videoNode.srcObject = myStream);
+       }, [myStream]);
+
+       return <>
+              {myStream && <video width="200px" ref={setVideoNode} autoPlay={true} /> }
+       </>
+}
 
 export default MyVideo;
