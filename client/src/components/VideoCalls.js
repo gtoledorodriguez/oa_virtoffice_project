@@ -2,9 +2,11 @@ import React, {useEffect, useRef, useState} from "react";
 import InitiatedVideoCall from './InitiatedVideoCall';
 import { connect } from "react-redux";
 import { MY_CHARACTER_INIT_CONFIG } from "./characterConstants";
+import MyVideo from './MyVideo';
 
 function VideoCalls({ myCharacterData, otherCharactersData, webrtcSocket}) {
     const [myStream, setMyStream] = useState();
+    const [offersRecieved, setOffersReceived] = useState({}); //key->socketId value->offer
     useEffect(() => {
         console.log('ue');
         navigator.mediaDevices.getUserMedia({video: true, audio: true})
@@ -12,12 +14,17 @@ function VideoCalls({ myCharacterData, otherCharactersData, webrtcSocket}) {
             setMyStream(stream);
         });
     }, []);
-
-    //Add Listener to listen for websocket
-    // webrtcSocket.on("recieveOffer", (callFromUserSocketId, callToUserSocketId, offerSignal) => { 
-    //     // console.log("Listened to recieveOffer");
-    //     console.log("recieved offer from ", callFromUserSocketId, ' to ', callToUserSocketId);
-    //   });
+    useEffect(() => {
+        webrtcSocket.on("receiveOffer", payload => {
+            console.log("received offer from ", payload.callFromUserSocketId, ", offers Received: ", Object.keys(payload.offerSignal));
+            if( !Object.keys(offersRecieved).includes(payload.callFromUserSocketId)) {
+                setOffersReceived({
+                    ...offersRecieved,
+                    [payload.callFromUserSocketId]: payload.offerSignal,
+                });
+            }
+        });
+    }, [webrtcSocket, offersRecieved]);
     
     const myUserId = myCharacterData?.id;
     const initiateCallToUSers = Object.keys(otherCharactersData)
