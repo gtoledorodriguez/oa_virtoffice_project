@@ -4,6 +4,9 @@ import Peer from "simple-peer";
 function ReceivedVideoCall({mySocketId, myStream, othersSocketId, webrtcSocket, offerSignal}) {
     const peerRef = useRef();
     const [othersStream, setOthersStream] = useState();
+    const setVideoNode = useCallback(videoNode => {
+        videoNode && (videoNode.srcObject = othersStream);
+    }, [othersStream]);
 
     const createPeer = useCallback((othersSocketId, mySocketId, myStream, webrtcSocket, offerSignal) => {
         const peer = new Peer({
@@ -20,8 +23,11 @@ function ReceivedVideoCall({mySocketId, myStream, othersSocketId, webrtcSocket, 
 
     useEffect(() => {
         peerRef.current = createPeer(othersSocketId, mySocketId, myStream, webrtcSocket, offerSignal);
+        peerRef.current.on('stream', (stream) => {setOthersStream(stream)});
     }, [mySocketId, myStream, othersSocketId, webrtcSocket]);
-    return <></>
+    return <>
+        {othersStream && <video width="200px" ref={setVideoNode} autoPlay={true} />}
+    </>
 }
 
 export default ReceivedVideoCall;
