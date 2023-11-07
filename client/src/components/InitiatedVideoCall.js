@@ -3,6 +3,10 @@ import Peer from 'simple-peer';
 
 function InitiatedVideoCall({mySocketId, myStream, othersSocketId, webrtcSocket}) {
     const peerRef = useRef();
+    const [othersStream, setOthersStream] = useState();
+    const setVideoNode = useCallback(videoNode => {
+        videoNode && (videoNode.srcObject = othersStream);
+    }, [othersStream]);
 
     const createPeer = useCallback((othersSocketId, mySocketId, myStream, webrtcSocket) => {
         const peer = new Peer({
@@ -24,8 +28,11 @@ function InitiatedVideoCall({mySocketId, myStream, othersSocketId, webrtcSocket}
                 peerRef.current.signal(payload.answerSignal);
             }
         });
+        peerRef.current.on('stream', (stream) => {setOthersStream(stream)});
     }, [mySocketId, myStream, othersSocketId, webrtcSocket]);
-    return <></>
+    return <>
+        {othersStream && <video width="200px" ref={setVideoNode} autoPlay={true} />}
+    </>
 }
 
 export default InitiatedVideoCall;
