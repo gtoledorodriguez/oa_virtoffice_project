@@ -23,17 +23,6 @@ The purpose of this project is to provide a digital platform for remote workers 
 
 5. Start your backend server
     `node index.js`
-What are the benefits of remote work?
--For employees, no need to commute and more flexible time schedule
-- For managers, no office rent and lower human spending
-What are the pain points of remote work that are "forcing" people to RTO?
-- For employees
-- Communication cost
--Hard to ramp up
-Hard to get to know people on the team
-- Distraction at home
-For managers
-Employee productivity
         If it starts successfully, you should see *"Server is running on port 8080"*
 
 6. Keep your server running and open a new terminal
